@@ -1,0 +1,26 @@
+.card{
+    width: 500px;
+    .tasks{
+        padding: 0;
+        & > li{
+            list-style-type: none;
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+            .completedTask{
+                text-decoration: line-through;
+                color: rgb(166, 166, 166);
+            }
+        }
+     
+    }
+    .panel{
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        .active{
+            color: rgb(133, 9, 149);
+            border-color: rgb(133, 9, 149);
+        }
+    }
+}
