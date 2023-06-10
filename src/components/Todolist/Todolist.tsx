@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import s from "./Todolist.module.scss";
 import { Task } from "./Task/Task";
 import { AddTaskForm } from "../AddTaskForm/AddTaskForm";
@@ -18,15 +18,20 @@ export const Todolist = () => {
 
   const setFilterHandler = (filter: FilterType) => setFilter(filter);
 
-  const addTask = (title: string) =>
-    setTasks([...tasks, { id: "" + Math.random(), title, status: "Active" }])
+  const addTask = useCallback(
+    (title: string) =>
+      setTasks((tasks) => [
+        ...tasks,
+        { id: "" + Math.random(), title, status: "Active" },
+      ]),
+    []
+  );
 
-  const changeTaskStatus = (id: string, filter: FilterType) => {
-    const newTasks = tasks.map((t) =>
-      t.id === id ? { ...t, status: filter } : t
+  const changeTaskStatus = useCallback((id: string, filter: FilterType) => {
+    setTasks((tasks) =>
+      tasks.map((t) => (t.id === id ? { ...t, status: filter } : t))
     );
-    setTasks(newTasks);
-  };
+  }, []);
 
   const renderFilterButton = (buttonFilter: FilterType) => {
     return (
@@ -38,7 +43,7 @@ export const Todolist = () => {
       </Button>
     );
   };
-  
+
   const removeTasksCompleted = () => {
     setTasks(tasks.filter((t) => t.status !== "Completed"));
   };
@@ -59,7 +64,6 @@ export const Todolist = () => {
   ) : (
     <span>List is empty</span>
   );
-
 
   return (
     <Card className={s.card}>

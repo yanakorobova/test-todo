@@ -6,7 +6,7 @@ type AddItemFormPropsType = {
   text: string;
 };
 
-export const AddTaskForm: React.FC<AddItemFormPropsType> = ({
+export const AddTaskForm: React.FC<AddItemFormPropsType> = React.memo(({
   callback,
   text,
 }) => {
@@ -37,4 +37,4 @@ export const AddTaskForm: React.FC<AddItemFormPropsType> = ({
       />
     </div>
   );
-};
+});

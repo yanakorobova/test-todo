@@ -1,3 +1,4 @@
+import React from 'react'
 import { FilterType, TaskType } from "../Todolist";
 import { Checkbox } from "antd";
 import type { CheckboxChangeEvent } from "antd/es/checkbox";
@@ -8,7 +9,7 @@ type TaskPropsType = {
   changeTaskStatus: (id: string, filter: FilterType) => void;
 };
 
-export const Task: React.FC<TaskPropsType> = ({ task, changeTaskStatus }) => {
+export const Task: React.FC<TaskPropsType> = React.memo(({ task, changeTaskStatus }) => {
   const { id, title, status } = task;
 
   const changeStatusHandler = (e: CheckboxChangeEvent) => {
@@ -27,4 +28,4 @@ export const Task: React.FC<TaskPropsType> = ({ task, changeTaskStatus }) => {
       </span>
     </li>
   );
-};
+});
